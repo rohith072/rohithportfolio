@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohith K | AI/ML & Software Engineer Portfolio</title>
+    <meta name="description" content="Portfolio of Rohith K - Motivated Electrical & Electronics Engineer specializing in AI, Machine Learning, Computer Vision, Deep Learning, Python, and Flutter Development.">
+    <meta name="keywords" content="Rohith K, AI Engineer, Machine Learning, Computer Vision, Deep Learning, Python, Flutter, Software Engineer Portfolio">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Rohith K - AI/ML & Software Engineer">
+    <meta property="og:description" content="Explore AI/ML Projects, Computer Vision Systems, Mobile Apps & Technical Skills.">
+    <meta property="og:image" content="./assets/rohith_profile.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Interactive Background Particles Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Glowing Ambient Lighting Bulbs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Navigation Header -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-brand">
+                <span class="brand-badge"><i data-lucide="sparkles"></i></span>
+                <span class="brand-text">ROHITH <span class="highlight">K</span></span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#metrics" class="nav-link">Stats</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Timeline</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="./assets/Rohith_K_Resume.pdf" download="Rohith_K_Resume.pdf" class="btn btn-outline btn-sm glow-on-hover">
+                    <i data-lucide="download"></i> <span>Resume</span>
+                </a>
+                <button class="sound-toggle-btn" id="soundToggle" title="Toggle Ambient Audio Beats">
+                    <i data-lucide="volume-x" id="soundIcon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-content">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-grid">
+                <!-- Left Content -->
+                <div class="hero-text-content">
+                    <div class="status-pill">
+                        <span class="pulse-dot"></span>
+                        <span>Seeking Full-Time AI/ML & Software Engineer Roles</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="gradient-text">Rohith K</span>
+                    </h1>
+
+                    <h2 class="hero-subtitle">
+                        I build <span id="typing-text" class="typing-text"></span><span class="cursor">|</span>
+                    </h2>
+
+                    <p class="hero-description">
+                        Electrical & Electronics Engineering student driven by a passion for creating end-to-end AI/ML systems, Computer Vision applications, and high-performance Flutter mobile solutions.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#projects" class="btn btn-primary btn-glow">
+                            <i data-lucide="rocket"></i> Explore Work
+                        </a>
+                        <a href="./assets/Rohith_K_Resume.pdf" target="_blank" class="btn btn-glass">
+                            <i data-lucide="file-text"></i> View Resume PDF
+                        </a>
+                        <a href="https://linkedin.com/in/rohith23112004" target="_blank" class="social-icon-btn" title="LinkedIn">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="https://github.com/rohith072" target="_blank" class="social-icon-btn" title="GitHub">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <a href="mailto:connectwithrohithofficial@gmail.com" class="social-icon-btn" title="Email">
+                            <i data-lucide="mail"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Card - Interactive Profile Card -->
+                <div class="hero-card-wrapper" data-tilt>
+                    <div class="hero-card glass-card">
+                        <div class="card-badge"><i data-lucide="zap"></i> Top Talent</div>
+                        
+                        <div class="profile-img-container">
+                            <img src="./assets/rohith_profile.jpg" alt="Rohith K Profile Picture" class="profile-img">
+                            <div class="profile-ring"></div>
+                        </div>
+
+                        <div class="card-user-info">
+                            <h3>Rohith K</h3>
+                            <p class="role-text">AI/ML & Software Engineer</p>
+                            <span class="location-tag"><i data-lucide="map-pin"></i> Coimbatore, India</span>
+                        </div>
+
+                        <div class="mini-metrics-row">
+                            <div class="mini-metric">
+                                <span class="metric-num">8.013</span>
+                                <span class="metric-lbl">CGPA (B.E. EEE)</span>
+                            </div>
+                            <div class="mini-metric-divider"></div>
+                            <div class="mini-metric">
+                                <span class="metric-num">95%+</span>
+                                <span class="metric-lbl">AI Accuracy</span>
+                            </div>
+                            <div class="mini-metric-divider"></div>
+                            <div class="mini-metric">
+                                <span class="metric-num">5+</span>
+                                <span class="metric-lbl">AI & IoT Apps</span>
+                            </div>
+                        </div>
+
+                        <div class="quick-skills-chips">
+                            <span><i data-lucide="cpu"></i> PyTorch / TF</span>
+                            <span><i data-lucide="eye"></i> OpenCV</span>
+                            <span><i data-lucide="smartphone"></i> Flutter</span>
+                            <span><i data-lucide="server"></i> Flask</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Counter Section -->
+        <section id="metrics" class="section metrics-section">
+            <div class="bento-grid-stats">
+                <div class="stat-card glass-card" data-tilt>
+                    <div class="stat-icon-box cyan"><i data-lucide="brain-circuit"></i></div>
+                    <div class="stat-content">
+                        <div class="number-wrapper"><h3 class="counter" data-target="95">0</h3><span class="plus">%+</span></div>
+                        <p>AI Face & Leaf Recognition Accuracy</p>
+                    </div>
+                </div>
+
+                <div class="stat-card glass-card" data-tilt>
+                    <div class="stat-icon-box violet"><i data-lucide="timer"></i></div>
+                    <div class="stat-content">
+                        <div class="number-wrapper"><h3 class="counter" data-target="90">0</h3><span class="plus">%</span></div>
+                        <p>Time Reduction in AI Attendance Systems</p>
+                    </div>
+                </div>
+
+                <div class="stat-card glass-card" data-tilt>
+                    <div class="stat-icon-box emerald"><i data-lucide="gauge"></i></div>
+                    <div class="stat-content">
+                        <div class="number-wrapper"><h3 class="counter" data-target="70">0</h3><span class="plus">%</span></div>
+                        <p>Inspection Speedup in Defect Detection</p>
+                    </div>
+                </div>
+
+                <div class="stat-card glass-card" data-tilt>
+                    <div class="stat-icon-box amber"><i data-lucide="award"></i></div>
+                    <div class="stat-content">
+                        <div class="number-wrapper"><h3 class="counter" data-target="8">0</h3><span class="decimal">.013</span></div>
+                        <p>Academic CGPA at MCET Coimbatore</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section (Bento Style) -->
+        <section id="about" class="section about-section">
+            <div class="section-header">
+                <span class="section-badge"><i data-lucide="user"></i> PASSION & VISION</span>
+                <h2 class="section-title">About <span class="gradient-text">Rohith K</span></h2>
+            </div>
+
+            <div class="bento-about-grid">
+                <div class="bento-box main-bio glass-card">
+                    <div class="bio-icon"><i data-lucide="code"></i></div>
+                    <h3>Who I Am</h3>
+                    <p>
+                        I am an Electrical and Electronics Engineering graduate from Dr. Mahalingam College of Engineering and Technology (CGPA 8.013) with deep expertise in <strong>Machine Learning, Deep Learning, Computer Vision, Python, and Flutter Mobile Development</strong>.
+                    </p>
+                    <p>
+                        My mission is to engineer scalable, intelligent real-world systems—ranging from automated AI quality inspection for factories to smart agricultural disease detection and campus automation platforms.
+                    </p>
+                </div>
+
+                <div class="bento-box focus-areas glass-card">
+                    <h3><i data-lucide="compass"></i> Core Engineering Focus</h3>
+                    <ul class="focus-list">
+                        <li>
+                            <i data-lucide="check-circle-2"></i>
+                            <div>
+                                <strong>Artificial Intelligence & Deep Learning</strong>
+                                <span>Neural Networks, Object Detection, Image Classification, Transfer Learning</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle-2"></i>
+                            <div>
+                                <strong>Computer Vision Applications</strong>
+                                <span>OpenCV face verification, defect inspection, OpenCV frame filtering</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle-2"></i>
+                            <div>
+                                <strong>Smart Agri-Tech Platforms</strong>
+                                <span>Crop disease diagnostic ML models deployed to Flutter mobile devices</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle-2"></i>
+                            <div>
+                                <strong>Mobile & Embedded Backend</strong>
+                                <span>Flutter apps with real-time SQLite/Flask backends & Arduino firmware integration</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section">
+            <div class="section-header">
+                <span class="section-badge"><i data-lucide="folder-git-2"></i> PORTFOLIO WORK</span>
+                <h2 class="section-title">Featured <span class="gradient-text">AI & Mobile Projects</span></h2>
+                <p class="section-subtitle">Real-world AI systems built with OpenCV, TensorFlow, Flask, Flutter, and Embedded Systems</p>
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ai">AI / Computer Vision</button>
+                <button class="filter-btn" data-filter="mobile">Flutter / Mobile</button>
+                <button class="filter-btn" data-filter="iot">IoT / Embedded</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                
+                <!-- Project 1 -->
+                <div class="project-card glass-card" data-category="ai" data-tilt>
+                    <div class="project-img-wrapper">
+                        <img src="./assets/smart_attendance.jpg" alt="AI Smart Classroom Attendance System" class="project-img">
+                        <div class="project-overlay">
+                            <button class="btn btn-sm btn-primary view-project-btn" data-project="1">
+                                <i data-lucide="eye"></i> Interactive Demo
+                            </button>
+                        </div>
+                        <span class="project-tag-pill">AI & CV</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">AI-Based Smart Classroom Attendance</h3>
+                        <p class="project-desc">
+                            End-to-end face recognition attendance system using OpenCV and LBPH with 2-of-3 frame verification, achieving 95%+ accuracy and 90% time saving for 100+ student records.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>Python</span>
+                            <span>OpenCV</span>
+                            <span>LBPH Face Rec</span>
+                            <span>Flask</span>
+                            <span>SQLite</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card" data-category="ai mobile" data-tilt>
+                    <div class="project-img-wrapper">
+                        <img src="./assets/crop_disease.jpg" alt="Crop Disease Detection Platform" class="project-img">
+                        <div class="project-overlay">
+                            <button class="btn btn-sm btn-primary view-project-btn" data-project="2">
+                                <i data-lucide="eye"></i> Interactive Demo
+                            </button>
+                        </div>
+                        <span class="project-tag-pill green">Agri-Tech AI</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Crop Disease Detection – Smart Crop</h3>
+                        <p class="project-desc">
+                            ML-powered agriculture platform using TensorFlow and Keras image classification to detect 5+ crop diseases with >90% accuracy, deployed via a Flutter mobile application.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>TensorFlow</span>
+                            <span>Keras</span>
+                            <span>Flutter</span>
+                            <span>Transfer Learning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card" data-category="ai" data-tilt>
+                    <div class="project-img-wrapper">
+                        <img src="./assets/defect_detection.jpg" alt="Quality Control AI Defect Detection" class="project-img">
+                        <div class="project-overlay">
+                            <button class="btn btn-sm btn-primary view-project-btn" data-project="3">
+                                <i data-lucide="eye"></i> Interactive Demo
+                            </button>
+                        </div>
+                        <span class="project-tag-pill orange">Industrial AI</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Quality Control AI – Automated Defect Detection</h3>
+                        <p class="project-desc">
+                            Computer vision system for real-time manufacturing defect inspection. Reduced manual inspection time by ~70% while improving manufacturing production accuracy.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>Python</span>
+                            <span>OpenCV</span>
+                            <span>Computer Vision</span>
+                            <span>Industrial Automation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-card" data-category="mobile iot" data-tilt>
+                    <div class="project-img-wrapper">
+                        <img src="./assets/smart_ration.jpg" alt="Smart Ration Distribution App" class="project-img">
+                        <div class="project-overlay">
+                            <button class="btn btn-sm btn-primary view-project-btn" data-project="4">
+                                <i data-lucide="eye"></i> Interactive Demo
+                            </button>
+                        </div>
+                        <span class="project-tag-pill purple">IoT & Mobile</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Smart Ration Distribution Platform</h3>
+                        <p class="project-desc">
+                            Flutter mobile app with user authentication and real-time stock tracking, coupled with Arduino embedded firmware for automated data acquisition and inventory management.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>Flutter</span>
+                            <span>Arduino</span>
+                            <span>Embedded Systems</span>
+                            <span>IoT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-card" data-category="mobile" data-tilt>
+                    <div class="project-img-wrapper">
+                        <div class="project-code-preview">
+                            <div class="code-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span class="code-title">faculty_tracker.dart</span>
+                            </div>
+                            <pre><code>void trackFacultyStatus() {
+  StreamSubscription sub = 
+    FirebaseDatabase.instance
+      .ref("faculty")
+      .onValue.listen((event) {
+        updateMapUI(event.snapshot);
+      });
+}</code></pre>
+                        </div>
+                        <div class="project-overlay">
+                            <button class="btn btn-sm btn-primary view-project-btn" data-project="5">
+                                <i data-lucide="eye"></i> Interactive Demo
+                            </button>
+                        </div>
+                        <span class="project-tag-pill cyan">Campus App</span>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Staff Availability Tracker App</h3>
+                        <p class="project-desc">
+                            Real-time faculty availability tracking application built in Flutter, enabling students across college campuses to instantly locate available staff and department offices.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>Flutter</span>
+                            <span>Dart</span>
+                            <span>REST API</span>
+                            <span>Campus Navigation</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="section skills-section">
+            <div class="section-header">
+                <span class="section-badge"><i data-lucide="layers"></i> TECH SPECTRUM</span>
+                <h2 class="section-title">Technical <span class="gradient-text">Stack & Tools</span></h2>
+            </div>
+
+            <div class="bento-skills-grid">
+                <!-- Skill Category 1 -->
+                <div class="skill-category-card glass-card">
+                    <div class="category-header">
+                        <div class="cat-icon cyan"><i data-lucide="terminal"></i></div>
+                        <h3>Programming Languages</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Python</span><span class="level">Advanced</span></div>
+                            <div class="progress-bar"><div class="progress-fill cyan" style="width: 92%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Dart (Flutter)</span><span class="level">Proficient</span></div>
+                            <div class="progress-bar"><div class="progress-fill cyan" style="width: 85%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>C / C++</span><span class="level">Intermediate</span></div>
+                            <div class="progress-bar"><div class="progress-fill cyan" style="width: 78%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Java</span><span class="level">Intermediate</span></div>
+                            <div class="progress-bar"><div class="progress-fill cyan" style="width: 75%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 2 -->
+                <div class="skill-category-card glass-card">
+                    <div class="category-header">
+                        <div class="cat-icon violet"><i data-lucide="brain"></i></div>
+                        <h3>AI, ML & Computer Vision</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>OpenCV & Image Processing</span><span class="level">Advanced</span></div>
+                            <div class="progress-bar"><div class="progress-fill violet" style="width: 90%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>TensorFlow / Keras</span><span class="level">Proficient</span></div>
+                            <div class="progress-bar"><div class="progress-fill violet" style="width: 86%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Neural Networks & Transfer Learning</span><span class="level">Proficient</span></div>
+                            <div class="progress-bar"><div class="progress-fill violet" style="width: 88%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>scikit-learn & Statistical Analysis</span><span class="level">Intermediate</span></div>
+                            <div class="progress-bar"><div class="progress-fill violet" style="width: 82%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 3 -->
+                <div class="skill-category-card glass-card">
+                    <div class="category-header">
+                        <div class="cat-icon emerald"><i data-lucide="layout flex"></i></div>
+                        <h3>Mobile, Backend & Tools</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Flutter & Android Studio</span><span class="level">Advanced</span></div>
+                            <div class="progress-bar"><div class="progress-fill emerald" style="width: 88%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Flask & RESTful APIs</span><span class="level">Proficient</span></div>
+                            <div class="progress-bar"><div class="progress-fill emerald" style="width: 84%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>SQLite & Database Mgmt</span><span class="level">Proficient</span></div>
+                            <div class="progress-bar"><div class="progress-fill emerald" style="width: 80%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-meta"><span>Git / GitHub / Jupyter</span><span class="level">Advanced</span></div>
+                            <div class="progress-bar"><div class="progress-fill emerald" style="width: 90%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section (Education, Certifications & Activities) -->
+        <section id="experience" class="section timeline-section">
+            <div class="section-header">
+                <span class="section-badge"><i data-lucide="graduation-cap"></i> JOURNEY & HONORS</span>
+                <h2 class="section-title">Education & <span class="gradient-text">Achievements</span></h2>
+            </div>
+
+            <div class="timeline-container">
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot cyan"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="timeline-date">2021 - Present</span>
+                        <h3>B.E. – Electrical & Electronics Engineering</h3>
+                        <p class="timeline-institution">Dr. Mahalingam College of Engineering and Technology, Coimbatore</p>
+                        <div class="grade-badge">CGPA: 8.013</div>
+                        <p class="timeline-details">Specializing in AI/ML integration, computer vision systems, smart agricultural technology, and IoT mobile backends.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot violet"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="timeline-date">IEEE Sponsored Technical Event</span>
+                        <h3>VCET HackElite – 24-Hour National Hackathon</h3>
+                        <p class="timeline-institution">National Level Student Technical Hackathon</p>
+                        <p class="timeline-details">Demonstrated rapid prototyping, AI/ML model deployment, and high-pressure team problem solving during an intensive 24-hour sprint.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot emerald"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="timeline-date">Certifications & Workshops</span>
+                        <h3>Drone Lab Workshop & Microsoft Excel Certification</h3>
+                        <ul class="timeline-list">
+                            <li><i data-lucide="award"></i> Certified in Microsoft Excel Data Analytics & Statistical Modeling</li>
+                            <li><i data-lucide="cpu"></i> Completed Hands-on Drone Dynamics & Sensor Integration Workshop</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot amber"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="timeline-date">Social Impact</span>
+                        <h3>National Service Scheme (NSS) Volunteer</h3>
+                        <p class="timeline-details">Actively led community engagement, technological literacy drives, and environmental sustainability initiatives.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="contact-box glass-card">
+                <div class="contact-header">
+                    <span class="section-badge"><i data-lucide="send"></i> GET IN TOUCH</span>
+                    <h2 class="section-title">Let's Build Something <span class="gradient-text">Intelligent</span> Together</h2>
+                    <p>Have an open AI/ML Engineer position, project idea, or collaboration? Reach out directly!</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info-list">
+                        <a href="mailto:connectwithrohithofficial@gmail.com" class="contact-info-card">
+                            <div class="contact-icon"><i data-lucide="mail"></i></div>
+                            <div>
+                                <span class="info-label">Direct Email</span>
+                                <span class="info-val">connectwithrohithofficial@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <a href="tel:+919037193207" class="contact-info-card">
+                            <div class="contact-icon"><i data-lucide="phone"></i></div>
+                            <div>
+                                <span class="info-label">Phone Call</span>
+                                <span class="info-val">+91 9037193207</span>
+                            </div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/rohith23112004" target="_blank" class="contact-info-card">
+                            <div class="contact-icon"><i data-lucide="linkedin"></i></div>
+                            <div>
+                                <span class="info-label">LinkedIn Profile</span>
+                                <span class="info-val">linkedin.com/in/rohith23112004</span>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/rohith072" target="_blank" class="contact-info-card">
+                            <div class="contact-icon"><i data-lucide="github"></i></div>
+                            <div>
+                                <span class="info-label">GitHub Repositories</span>
+                                <span class="info-val">github.com/rohith072</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" placeholder="Hi Rohith, we would love to interview you for an AI Engineer position..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i data-lucide="send"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive AI Assistant Bot Widget ("Ask Rohith AI") -->
+    <div class="ai-bot-widget" id="aiBotWidget">
+        <button class="ai-bot-trigger" id="aiBotTrigger" title="Ask Rohith AI Anything!">
+            <i data-lucide="bot"></i>
+            <span class="bot-status-badge">AI</span>
+        </button>
+
+        <div class="ai-chat-window glass-card hidden" id="aiChatWindow">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <i data-lucide="sparkles"></i>
+                    <span>Rohith Assistant AI</span>
+                </div>
+                <button class="chat-close" id="chatClose"><i data-lucide="x"></i></button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-msg bot-msg">
+                    👋 Hi! I am Rohith's AI Assistant. Ask me anything about his AI/ML projects, skills, education, or contact details!
+                </div>
+            </div>
+
+            <div class="chat-quick-prompts">
+                <button class="prompt-chip" data-prompt="What AI models has Rohith built?">AI Models?</button>
+                <button class="prompt-chip" data-prompt="What is Rohith's CGPA and college?">Education?</button>
+                <button class="prompt-chip" data-prompt="How can I contact Rohith?">Contact Info?</button>
+            </div>
+
+            <form class="chat-input-form" id="chatForm">
+                <input type="text" id="chatInput" placeholder="Ask about Rohith's skills..." autocomplete="off">
+                <button type="submit" class="btn-chat-send"><i data-lucide="send"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Interactive Detail Modal -->
+    <div class="modal-backdrop hidden" id="projectModal">
+        <div class="modal-card glass-card">
+            <button class="modal-close" id="modalClose"><i data-lucide="x"></i></button>
+            
+            <div class="modal-body" id="modalBody">
+                <!-- Content inserted dynamically by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>© 2026 Rohith K. Crafted with AI, Passion & Precision.</p>
+            <p class="footer-links">
+                <a href="https://linkedin.com/in/rohith23112004" target="_blank">LinkedIn</a> • 
+                <a href="https://github.com/rohith072" target="_blank">GitHub</a> • 
+                <a href="./assets/Rohith_K_Resume.pdf" download>Resume PDF</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
