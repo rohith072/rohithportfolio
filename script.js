@@ -486,11 +486,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       9. CONTACT FORM HANDLING WITH GUARANTEED EMAIL DELIVERY
+       9. CONTACT FORM HANDLING & DYNAMIC MAILTO LINK
        -------------------------------------------------------------------------- */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        // Update direct email button as user types
         const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
         const messageInput = document.getElementById('message');
@@ -498,11 +497,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateMailto() {
             if (directEmailBtn) {
-                const name = nameInput.value || 'Visitor';
-                const email = emailInput.value || '';
-                const msg = messageInput.value || '';
+                const name = nameInput ? nameInput.value || 'Visitor' : 'Visitor';
+                const email = emailInput ? emailInput.value || '' : '';
+                const msg = messageInput ? messageInput.value || '' : '';
                 const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-                const body = encodeURIComponent(`Hi Rohith,\n\n${msg}\n\nFrom: ${name} (${email})`);
+                const body = encodeURIComponent(`Hi Rohith,\n\n${msg}\n\nBest regards,\n${name}\nEmail: ${email}`);
                 directEmailBtn.href = `mailto:connectwithrohithofficial@gmail.com?subject=${subject}&body=${body}`;
             }
         }
@@ -510,58 +509,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nameInput) nameInput.addEventListener('input', updateMailto);
         if (emailInput) emailInput.addEventListener('input', updateMailto);
         if (messageInput) messageInput.addEventListener('input', updateMailto);
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            
-            const name = nameInput.value;
-            const email = emailInput.value;
-            const message = messageInput.value;
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Sending...`;
-            if (window.lucide) lucide.createIcons();
-
-            // Prepare mailto fallback URL
-            const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-            const body = encodeURIComponent(`Hi Rohith,\n\n${message}\n\nBest regards,\n${name}\nEmail: ${email}`);
-            const mailtoUrl = `mailto:connectwithrohithofficial@gmail.com?subject=${subject}&body=${body}`;
-
-            try {
-                // Try FormSubmit API endpoint
-                const res = await fetch("https://formsubmit.co/ajax/connectwithrohithofficial@gmail.com", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        message: message,
-                        _subject: `New Portfolio Message from ${name}`
-                    })
-                });
-
-                if (res.ok) {
-                    showToast(`Message sent! Opening email app to confirm delivery.`);
-                    setTimeout(() => { window.location.href = mailtoUrl; }, 1000);
-                    contactForm.reset();
-                } else {
-                    window.location.href = mailtoUrl;
-                }
-            } catch (err) {
-                // Open mailto link directly
-                showToast(`Opening your email app to send to connectwithrohithofficial@gmail.com...`);
-                window.location.href = mailtoUrl;
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-                if (window.lucide) lucide.createIcons();
-            }
-        });
     }
 
     function showToast(msg) {
