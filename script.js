@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WIDGET
+       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WIDGET WITH SPEECH SYNTHESIS
        -------------------------------------------------------------------------- */
     const aiBotTrigger = document.getElementById('aiBotTrigger');
     const aiChatWindow = document.getElementById('aiChatWindow');
@@ -397,6 +397,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatForm = document.getElementById('chatForm');
     const chatInput = document.getElementById('chatInput');
     const chatMessages = document.getElementById('chatMessages');
+    const voiceIntroBtn = document.getElementById('voiceIntroBtn');
+    const equalizerBars = document.getElementById('equalizerBars');
+
+    let isSpeaking = false;
+    const synth = window.speechSynthesis;
+
+    function speakText(text, onEndCallback) {
+        if (!synth) return;
+        synth.cancel(); // Stop any active speech
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+
+        // Try selecting a smooth natural English voice if available
+        const voices = synth.getVoices();
+        const preferredVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Male')));
+        if (preferredVoice) utterance.voice = preferredVoice;
+
+        utterance.onstart = () => {
+            isSpeaking = true;
+            if (equalizerBars) equalizerBars.classList.add('active');
+        };
+
+        utterance.onend = () => {
+            isSpeaking = false;
+            if (equalizerBars) equalizerBars.classList.remove('active');
+            if (onEndCallback) onEndCallback();
+        };
+
+        utterance.onerror = () => {
+            isSpeaking = false;
+            if (equalizerBars) equalizerBars.classList.remove('active');
+        };
+
+        synth.speak(utterance);
+    }
+
+    // Hero Voice Intro Play/Pause Listener
+    if (voiceIntroBtn) {
+        const introSpeechText = "Hi there! Welcome to my portfolio. I am Rohith K, an Electrical and Electronics Engineer specializing in AI, Machine Learning, Deep Learning, Computer Vision, and Flutter mobile applications. Explore my projects below or ask my AI assistant any questions!";
+
+        voiceIntroBtn.addEventListener('click', () => {
+            if (isSpeaking) {
+                synth.cancel();
+                isSpeaking = false;
+                if (equalizerBars) equalizerBars.classList.remove('active');
+            } else {
+                speakText(introSpeechText);
+            }
+        });
+    }
 
     if (aiBotTrigger) {
         aiBotTrigger.addEventListener('click', () => {
@@ -407,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chatClose) {
         chatClose.addEventListener('click', () => {
             aiChatWindow.classList.add('hidden');
+            if (synth) synth.cancel();
         });
     }
 
@@ -434,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             keywords: ['contact', 'email', 'phone', 'hire', 'linkedin', 'github'],
-            answer: "You can reach Rohith directly at connectwithrohithofficial@gmail.com, phone +91 9037193207, or connect on LinkedIn (in/rohith23112004) and GitHub (rohith072)!"
+            answer: "You can reach Rohith directly at connectwithrohithofficial@gmail.com, phone +91 9037193207, or connect on LinkedIn and GitHub!"
         },
         {
             keywords: ['hackathon', 'vcet', 'achievement', 'certificate'],
@@ -466,7 +519,10 @@ document.addEventListener('DOMContentLoaded', () => {
             botDiv.textContent = reply;
             chatMessages.appendChild(botDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 500);
+
+            // Speak response aloud!
+            speakText(reply);
+        }, 400);
     }
 
     if (chatForm) {

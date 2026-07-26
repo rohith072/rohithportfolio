@@ -62,18 +62,20 @@
     <!-- Main Container -->
     <main class="main-content">
 
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
+        <!-- Hero Section (Viral Reel Style) -->
+        <section id="hero" class="hero-section viral-hero">
+            <div class="hero-bg-accent"></div>
+            
             <div class="hero-grid">
                 <!-- Left Content -->
                 <div class="hero-text-content">
                     <div class="status-pill">
                         <span class="pulse-dot"></span>
-                        <span>Seeking Full-Time AI/ML & Software Engineer Roles</span>
+                        <span>Available for AI/ML & Software Engineer Roles</span>
                     </div>
 
                     <h1 class="hero-title">
-                        Hi, I'm <span class="gradient-text">Rohith K</span>
+                        Hi, I'm an <br><span class="gradient-text-viral">AI & ML Engineer</span>
                     </h1>
 
                     <h2 class="hero-subtitle">
@@ -81,66 +83,47 @@
                     </h2>
 
                     <p class="hero-description">
-                        Electrical & Electronics Engineering student driven by a passion for creating end-to-end AI/ML systems, Computer Vision applications, and high-performance Flutter mobile solutions.
+                        Motivated Electrical & Electronics Engineer specializing in <strong>Machine Learning, Deep Learning, Computer Vision</strong>, and high-performance <strong>Flutter</strong> mobile solutions.
                     </p>
 
                     <div class="hero-cta-group">
-                        <a href="#projects" class="btn btn-primary btn-glow">
-                            <i data-lucide="rocket"></i> Explore Work
+                        <a href="#projects" class="btn btn-viral-primary">
+                            <i data-lucide="rocket"></i> View My Work
                         </a>
-                        <a href="./assets/Rohith_K_Resume.pdf" target="_blank" class="btn btn-glass">
-                            <i data-lucide="file-text"></i> View Resume PDF
+                        <a href="#contact" class="btn btn-glass">
+                            <i data-lucide="mail"></i> Contact Me
                         </a>
-                        <a href="https://linkedin.com/in/rohith23112004" target="_blank" class="social-icon-btn" title="LinkedIn">
-                            <i data-lucide="linkedin"></i>
-                        </a>
-                        <a href="https://github.com/rohith072" target="_blank" class="social-icon-btn" title="GitHub">
-                            <i data-lucide="github"></i>
-                        </a>
-                        <a href="mailto:connectwithrohithofficial@gmail.com" class="social-icon-btn" title="Email">
-                            <i data-lucide="mail"></i>
+                        <a href="./assets/Rohith_K_Resume.pdf" target="_blank" class="btn btn-glass" title="Download Resume">
+                            <i data-lucide="file-text"></i> Resume PDF
                         </a>
                     </div>
                 </div>
 
-                <!-- Right Card - Interactive Profile Card -->
-                <div class="hero-card-wrapper" data-tilt>
-                    <div class="hero-card glass-card">
-                        <div class="card-badge"><i data-lucide="zap"></i> Top Talent</div>
-                        
-                        <div class="profile-img-container">
-                            <img src="./assets/rohith_profile.jpg" alt="Rohith K Profile Picture" class="profile-img">
-                            <div class="profile-ring"></div>
-                        </div>
-
-                        <div class="card-user-info">
-                            <h3>Rohith K</h3>
-                            <p class="role-text">AI/ML & Software Engineer</p>
-                            <span class="location-tag"><i data-lucide="map-pin"></i> Coimbatore, India</span>
-                        </div>
-
-                        <div class="mini-metrics-row">
-                            <div class="mini-metric">
-                                <span class="metric-num">8.013</span>
-                                <span class="metric-lbl">CGPA (B.E. EEE)</span>
-                            </div>
-                            <div class="mini-metric-divider"></div>
-                            <div class="mini-metric">
-                                <span class="metric-num">95%+</span>
-                                <span class="metric-lbl">AI Accuracy</span>
-                            </div>
-                            <div class="mini-metric-divider"></div>
-                            <div class="mini-metric">
-                                <span class="metric-num">5+</span>
-                                <span class="metric-lbl">AI & IoT Apps</span>
+                <!-- Right Content - Speaking Cutout Avatar & Voice Widget -->
+                <div class="hero-avatar-area" data-tilt>
+                    <div class="avatar-card-banner">
+                        <div class="avatar-img-frame">
+                            <img src="./assets/rohith_profile.jpg" alt="Rohith K Avatar" class="avatar-cutout-img">
+                            <div class="avatar-headphone-badge">
+                                <i data-lucide="headphones"></i>
+                                <span>AI Voice Active</span>
                             </div>
                         </div>
 
-                        <div class="quick-skills-chips">
-                            <span><i data-lucide="cpu"></i> PyTorch / TF</span>
-                            <span><i data-lucide="eye"></i> OpenCV</span>
-                            <span><i data-lucide="smartphone"></i> Flutter</span>
-                            <span><i data-lucide="server"></i> Flask</span>
+                        <!-- Floating Interactive Speech Controller -->
+                        <div class="voice-player-widget">
+                            <button id="voiceIntroBtn" class="voice-play-btn" title="Click to listen to Rohith introduce himself!">
+                                <i data-lucide="volume-2" id="voicePlayIcon"></i>
+                            </button>
+                            <div class="voice-info">
+                                <span class="voice-title">Listen to Intro</span>
+                                <div class="equalizer-bars" id="equalizerBars">
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

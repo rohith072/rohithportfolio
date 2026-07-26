@@ -447,63 +447,161 @@ h1, h2, h3, h4 {
     flex-wrap: wrap;
 }
 
-/* Hero Right Profile Card */
-.hero-card-wrapper {
-    perspective: 1000px;
+/* Viral Hero Section Styles (Instagram Reel Inspired) */
+.viral-hero {
+    position: relative;
+    padding: 3rem 0;
 }
 
-.hero-card {
-    padding: 2.2rem;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+.gradient-text-viral {
+    background: linear-gradient(135deg, #ff3b30 0%, #ff5e62 50%, #ff9500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3.8rem;
+    font-weight: 900;
+}
+
+.btn-viral-primary {
+    background: linear-gradient(135deg, #ff3b30 0%, #ff5e62 100%);
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 59, 48, 0.4);
+}
+
+.btn-viral-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 59, 48, 0.6);
+}
+
+/* Avatar Card & Reel Backdrop Frame */
+.hero-avatar-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-card-banner {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(135deg, #ff3b30 0%, #d6249f 50%, #285ae6 100%);
+    border-radius: 28px;
+    padding: 1.2rem;
+    box-shadow: 0 20px 50px rgba(255, 59, 48, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
 }
 
-.card-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(245, 158, 11, 0.15);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.profile-img-container {
-    width: 140px;
-    height: 140px;
-    margin: 1rem auto 1.5rem;
+.avatar-img-frame {
     position: relative;
+    width: 100%;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
 }
 
-.profile-img {
+.avatar-cutout-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid rgba(0, 242, 254, 0.5);
-    box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+    object-position: top center;
+    transition: transform 0.5s ease;
 }
 
-.profile-ring {
+.avatar-card-banner:hover .avatar-cutout-img {
+    transform: scale(1.05);
+}
+
+.avatar-headphone-badge {
     position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border: 2px dashed rgba(0, 242, 254, 0.4);
-    border-radius: 50%;
-    animation: rotateRing 25s linear infinite;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(7, 9, 19, 0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ff5e62;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-@keyframes rotateRing {
-    100% { transform: rotate(360deg); }
+/* Voice Controller Widget */
+.voice-player-widget {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: rgba(7, 9, 19, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.voice-play-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff3b30 0%, #ff5e62 100%);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.voice-play-btn:hover {
+    transform: scale(1.1);
+}
+
+.voice-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.voice-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.equalizer-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 14px;
+    margin-top: 2px;
+}
+
+.eq-bar {
+    width: 3px;
+    height: 4px;
+    background: #ff5e62;
+    border-radius: 2px;
+}
+
+.equalizer-bars.active .eq-bar {
+    animation: soundwave 0.8s ease-in-out infinite alternate;
+}
+
+.equalizer-bars.active .eq-bar:nth-child(1) { animation-delay: 0s; }
+.equalizer-bars.active .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+.equalizer-bars.active .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+.equalizer-bars.active .eq-bar:nth-child(4) { animation-delay: 0.1s; }
+
+@keyframes soundwave {
+    0% { height: 3px; }
+    100% { height: 14px; }
 }
 
 .card-user-info h3 {
