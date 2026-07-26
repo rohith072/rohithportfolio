@@ -486,15 +486,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       9. CONTACT FORM HANDLING WITH TOAST FEEDBACK
+       9. CONTACT FORM HANDLING WITH REAL EMAIL SENDING
        -------------------------------------------------------------------------- */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
             const name = document.getElementById('name').value;
-            showToast(`Thank you, ${name}! Your message has been sent to Rohith.`);
-            contactForm.reset();
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Sending...`;
+            if (window.lucide) lucide.createIcons();
+
+            try {
+                // Submit to FormSubmit.co endpoint (Sends real email to connectwithrohithofficial@gmail.com)
+                const res = await fetch("https://formsubmit.co/ajax/connectwithrohithofficial@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message,
+                        _subject: `New Portfolio Message from ${name}`
+                    })
+                });
+
+                if (res.ok) {
+                    showToast(`Message sent! Rohith will receive your email at connectwithrohithofficial@gmail.com.`);
+                    contactForm.reset();
+                } else {
+                    throw new Error("FormSubmit response error");
+                }
+            } catch (err) {
+                // Fallback: Open user's email client directly pre-filled to connectwithrohithofficial@gmail.com
+                showToast(`Opening your email application to send directly to Rohith...`);
+                const mailtoUrl = `mailto:connectwithrohithofficial@gmail.com?subject=${encodeURIComponent("Portfolio Message from " + name)}&body=${encodeURIComponent("Hi Rohith,\n\n" + message + "\n\nBest regards,\n" + name + "\n(" + email + ")")}`;
+                window.location.href = mailtoUrl;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                if (window.lucide) lucide.createIcons();
+            }
         });
     }
 
