@@ -506,13 +506,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     reelTalkingAvatar.muted = false;
                     reelTalkingAvatar.play();
                     if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-2');
-                    if (voiceTitleText) voiceTitleText.textContent = "Mute Audio";
+                    if (voiceTitleText) voiceTitleText.textContent = "Mute Intro";
                     if (equalizerBars) equalizerBars.classList.add('active');
                     if (window.lucide) lucide.createIcons();
                 } else {
                     reelTalkingAvatar.muted = true;
                     if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-x');
-                    if (voiceTitleText) voiceTitleText.textContent = "Play Reel Speech";
+                    if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
                     if (equalizerBars) equalizerBars.classList.remove('active');
                     if (window.lucide) lucide.createIcons();
                 }
