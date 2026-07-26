@@ -486,29 +486,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       9. CONTACT FORM HANDLING & DYNAMIC MAILTO LINK
+       9. CONTACT FORM HANDLING - DIRECT 1-CLICK EMAIL DISPATCH
        -------------------------------------------------------------------------- */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const messageInput = document.getElementById('message');
-        const directEmailBtn = document.getElementById('directEmailBtn');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
 
-        function updateMailto() {
-            if (directEmailBtn) {
-                const name = nameInput ? nameInput.value || 'Visitor' : 'Visitor';
-                const email = emailInput ? emailInput.value || '' : '';
-                const msg = messageInput ? messageInput.value || '' : '';
-                const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-                const body = encodeURIComponent(`Hi Rohith,\n\n${msg}\n\nBest regards,\n${name}\nEmail: ${email}`);
-                directEmailBtn.href = `mailto:connectwithrohithofficial@gmail.com?subject=${subject}&body=${body}`;
-            }
-        }
+            const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+            const body = encodeURIComponent(`Hi Rohith,\n\n${message}\n\nBest regards,\n${name}\nEmail: ${email}`);
+            
+            showToast(`Opening your email application to send directly to connectwithrohithofficial@gmail.com...`);
 
-        if (nameInput) nameInput.addEventListener('input', updateMailto);
-        if (emailInput) emailInput.addEventListener('input', updateMailto);
-        if (messageInput) messageInput.addEventListener('input', updateMailto);
+            setTimeout(() => {
+                window.location.href = `mailto:connectwithrohithofficial@gmail.com?subject=${subject}&body=${body}`;
+            }, 600);
+
+            contactForm.reset();
+        });
     }
 
     function showToast(msg) {
