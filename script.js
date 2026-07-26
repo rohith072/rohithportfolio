@@ -415,20 +415,92 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --------------------------------------------------------------------------
-       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WITH GENERAL & PORTFOLIO AI KNOWLEDGE
+       8. REAL-TIME TALKING PHOTO CANVAS & LIP-SYNC ANIMATION ENGINE
        -------------------------------------------------------------------------- */
+    const talkingCanvas = document.getElementById('talkingAvatarCanvas');
+    const voiceIntroBtn = document.getElementById('voiceIntroBtn');
+    const equalizerBars = document.getElementById('equalizerBars');
+    const voicePlayIcon = document.getElementById('voicePlayIcon');
+    const voiceTitleText = document.getElementById('voiceTitleText');
     const aiBotTrigger = document.getElementById('aiBotTrigger');
     const aiChatWindow = document.getElementById('aiChatWindow');
     const chatClose = document.getElementById('chatClose');
     const chatForm = document.getElementById('chatForm');
     const chatInput = document.getElementById('chatInput');
     const chatMessages = document.getElementById('chatMessages');
-    const voiceIntroBtn = document.getElementById('voiceIntroBtn');
-    const equalizerBars = document.getElementById('equalizerBars');
 
     let isSpeaking = false;
     const synth = window.speechSynthesis;
     let cachedMaleVoice = null;
+    let avatarImg = new Image();
+    avatarImg.src = './assets/rohith_profile.jpg';
+
+    let animTime = 0;
+    let isBlinking = false;
+
+    function renderTalkingPhoto() {
+        if (!talkingCanvas) return;
+        const ctx = talkingCanvas.getContext('2d');
+        const w = talkingCanvas.width;
+        const h = talkingCanvas.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        animTime += 1;
+
+        // Subtle idle head sway and breathing
+        const swayY = Math.sin(animTime * 0.03) * 1.5;
+        const scaleSway = 1 + Math.sin(animTime * 0.02) * 0.003;
+
+        ctx.save();
+        ctx.translate(w / 2, h / 2 + swayY);
+        ctx.scale(scaleSway, scaleSway);
+        ctx.translate(-w / 2, -h / 2);
+
+        if (avatarImg.complete) {
+            // Draw Main Image
+            ctx.drawImage(avatarImg, 0, 0, w, h);
+
+            // Lip-Sync Animation while Speaking
+            if (isSpeaking) {
+                const mouthOpen = Math.abs(Math.sin(animTime * 0.25)) * 9;
+                
+                // Crop mouth region from image and stretch dynamically
+                const mouthX = w * 0.44;
+                const mouthY = h * 0.38;
+                const mouthW = w * 0.14;
+                const mouthH = h * 0.06;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.ellipse(mouthX + mouthW / 2, mouthY + mouthH / 2, mouthW / 2, (mouthH + mouthOpen) / 2, 0, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(avatarImg, mouthX, mouthY, mouthW, mouthH + mouthOpen, mouthX, mouthY, mouthW, mouthH + mouthOpen);
+                
+                // Inner mouth shadow for realistic lip movement
+                ctx.fillStyle = 'rgba(40, 10, 10, 0.45)';
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // Periodic Eye Blink
+            if (Math.random() < 0.008) isBlinking = true;
+            if (isBlinking) {
+                ctx.fillStyle = '#1e293b';
+                ctx.fillRect(w * 0.41, h * 0.29, 18, 4);
+                ctx.fillRect(w * 0.54, h * 0.29, 18, 4);
+                setTimeout(() => { isBlinking = false; }, 120);
+            }
+        }
+
+        ctx.restore();
+        requestAnimationFrame(renderTalkingPhoto);
+    }
+
+    avatarImg.onload = () => {
+        renderTalkingPhoto();
+    };
+    if (avatarImg.complete) renderTalkingPhoto();
 
     function selectSoftMaleVoice() {
         if (!synth) return null;
@@ -463,9 +535,9 @@ document.addEventListener('DOMContentLoaded', () => {
         synth.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.88;  // Soft, relaxed, clear speech pace
-        utterance.pitch = 0.85; // Calming, soft male pitch
-        utterance.volume = 0.9;
+        utterance.rate = 0.88;
+        utterance.pitch = 0.85;
+        utterance.volume = 0.95;
 
         const maleVoice = cachedMaleVoice || selectSoftMaleVoice();
         if (maleVoice) utterance.voice = maleVoice;
@@ -473,65 +545,37 @@ document.addEventListener('DOMContentLoaded', () => {
         utterance.onstart = () => {
             isSpeaking = true;
             if (equalizerBars) equalizerBars.classList.add('active');
+            if (voiceTitleText) voiceTitleText.textContent = "Speaking...";
         };
 
         utterance.onend = () => {
             isSpeaking = false;
             if (equalizerBars) equalizerBars.classList.remove('active');
+            if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
             if (onEndCallback) onEndCallback();
         };
 
         utterance.onerror = () => {
             isSpeaking = false;
             if (equalizerBars) equalizerBars.classList.remove('active');
+            if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
         };
 
         synth.speak(utterance);
     }
 
-    // Hero Reel Talking Avatar Video & Speech Controller
-    const reelTalkingAvatar = document.getElementById('reelTalkingAvatar');
-    const heroStaticImg = document.getElementById('heroStaticImg');
-    const voicePlayIcon = document.getElementById('voicePlayIcon');
-    const voiceTitleText = document.getElementById('voiceTitleText');
-
+    // Hero Voice Intro Controller
     if (voiceIntroBtn) {
         const introSpeechText = "Hello, welcome to my portfolio! I am Rohith K, an Electrical and Electronics Engineer specializing in AI, Machine Learning, Deep Learning, Computer Vision, and Flutter app development. Feel free to explore my work or ask my AI assistant any question!";
 
         voiceIntroBtn.addEventListener('click', () => {
-            // Check if talking avatar video is loaded
-            if (reelTalkingAvatar && reelTalkingAvatar.readyState >= 1) {
-                if (reelTalkingAvatar.muted) {
-                    if (synth) synth.cancel();
-                    reelTalkingAvatar.muted = false;
-                    reelTalkingAvatar.play();
-                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-2');
-                    if (voiceTitleText) voiceTitleText.textContent = "Mute Intro";
-                    if (equalizerBars) equalizerBars.classList.add('active');
-                    if (window.lucide) lucide.createIcons();
-                } else {
-                    reelTalkingAvatar.muted = true;
-                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-x');
-                    if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
-                    if (equalizerBars) equalizerBars.classList.remove('active');
-                    if (window.lucide) lucide.createIcons();
-                }
+            if (isSpeaking) {
+                synth.cancel();
+                isSpeaking = false;
+                if (equalizerBars) equalizerBars.classList.remove('active');
+                if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
             } else {
-                // Speech fallback if video loop is poster-only
-                if (isSpeaking) {
-                    synth.cancel();
-                    isSpeaking = false;
-                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-2');
-                    if (equalizerBars) equalizerBars.classList.remove('active');
-                    if (window.lucide) lucide.createIcons();
-                } else {
-                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-x');
-                    if (window.lucide) lucide.createIcons();
-                    speakText(introSpeechText, () => {
-                        if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'volume-2');
-                        if (window.lucide) lucide.createIcons();
-                    });
-                }
+                speakText(introSpeechText);
             }
         });
     }

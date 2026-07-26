@@ -102,8 +102,8 @@
                 <!-- Right Content - Speaking Reel Cutout Avatar & Voice Controller -->
                 <div class="hero-avatar-area" data-tilt>
                     <div class="avatar-card-banner">
-                        <div class="avatar-img-frame">
-                            <video id="reelTalkingAvatar" class="avatar-cutout-img" src="./assets/rohith_talking_avatar.mp4" autoplay loop muted playsinline poster="./assets/rohith_profile.jpg"></video>
+                        <div class="avatar-img-frame" style="position: relative;">
+                            <canvas id="talkingAvatarCanvas" width="400" height="380" class="avatar-cutout-img"></canvas>
                             <img src="./assets/rohith_profile.jpg" alt="Rohith K Avatar" class="avatar-cutout-img" id="heroStaticImg" style="display: none;">
                         </div>
 
@@ -727,7 +727,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=9"></script>
+    <script src="script.js?v=10"></script>
     <script>
         lucide.createIcons();
     </script>
