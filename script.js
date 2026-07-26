@@ -489,19 +489,63 @@ document.addEventListener('DOMContentLoaded', () => {
         synth.speak(utterance);
     }
 
-    // Hero Voice Intro Play/Pause Listener
+    // Hero Video / Voice Intro Controller
+    const heroStaticImg = document.getElementById('heroStaticImg');
+    const heroIntroVideo = document.getElementById('heroIntroVideo');
+    const voicePlayIcon = document.getElementById('voicePlayIcon');
+    const voiceTitleText = document.getElementById('voiceTitleText');
+
     if (voiceIntroBtn) {
         const introSpeechText = "Hello, welcome to my portfolio! I am Rohith K, an Electrical and Electronics Engineer specializing in AI, Machine Learning, Deep Learning, Computer Vision, and Flutter app development. Feel free to explore my work or ask my AI assistant any question!";
 
         voiceIntroBtn.addEventListener('click', () => {
-            if (isSpeaking) {
-                synth.cancel();
-                isSpeaking = false;
-                if (equalizerBars) equalizerBars.classList.remove('active');
+            // Check if user has uploaded their own video file (assets/rohith_intro.mp4)
+            if (heroIntroVideo && heroIntroVideo.readyState >= 1) {
+                if (heroIntroVideo.paused) {
+                    if (synth) synth.cancel();
+                    heroStaticImg.style.display = 'none';
+                    heroIntroVideo.style.display = 'block';
+                    heroIntroVideo.play();
+                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'pause');
+                    if (voiceTitleText) voiceTitleText.textContent = "Pause Video";
+                    if (equalizerBars) equalizerBars.classList.add('active');
+                    if (window.lucide) lucide.createIcons();
+                } else {
+                    heroIntroVideo.pause();
+                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'play');
+                    if (voiceTitleText) voiceTitleText.textContent = "Play Video Intro";
+                    if (equalizerBars) equalizerBars.classList.remove('active');
+                    if (window.lucide) lucide.createIcons();
+                }
             } else {
-                speakText(introSpeechText);
+                // Speech fallback if video file is not loaded yet
+                if (isSpeaking) {
+                    synth.cancel();
+                    isSpeaking = false;
+                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'play');
+                    if (equalizerBars) equalizerBars.classList.remove('active');
+                    if (window.lucide) lucide.createIcons();
+                } else {
+                    if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'square');
+                    if (window.lucide) lucide.createIcons();
+                    speakText(introSpeechText, () => {
+                        if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'play');
+                        if (window.lucide) lucide.createIcons();
+                    });
+                }
             }
         });
+
+        if (heroIntroVideo) {
+            heroIntroVideo.addEventListener('ended', () => {
+                heroIntroVideo.style.display = 'none';
+                heroStaticImg.style.display = 'block';
+                if (voicePlayIcon) voicePlayIcon.setAttribute('data-lucide', 'play');
+                if (voiceTitleText) voiceTitleText.textContent = "Play Video Intro";
+                if (equalizerBars) equalizerBars.classList.remove('active');
+                if (window.lucide) lucide.createIcons();
+            });
+        }
     }
 
     if (aiBotTrigger) {
