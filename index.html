@@ -99,25 +99,25 @@
                     </div>
                 </div>
 
-                <!-- Right Content - Speaking Cutout Avatar & Video Intro Controller -->
+                <!-- Right Content - Speaking Reel Cutout Avatar & Voice Controller -->
                 <div class="hero-avatar-area" data-tilt>
                     <div class="avatar-card-banner">
                         <div class="avatar-img-frame">
-                            <img src="./assets/rohith_profile.jpg" alt="Rohith K Avatar" class="avatar-cutout-img" id="heroStaticImg">
-                            <video id="heroIntroVideo" class="avatar-intro-video" src="./assets/rohith_intro.mp4" playsinline preload="auto" style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 20px;"></video>
+                            <video id="reelTalkingAvatar" class="avatar-cutout-img" src="./assets/rohith_talking_avatar.mp4" autoplay loop muted playsinline poster="./assets/rohith_profile.jpg"></video>
+                            <img src="./assets/rohith_profile.jpg" alt="Rohith K Avatar" class="avatar-cutout-img" id="heroStaticImg" style="display: none;">
                             <div class="avatar-headphone-badge">
-                                <i data-lucide="video"></i>
-                                <span>Intro Video</span>
+                                <i data-lucide="headphones"></i>
+                                <span>AI Reel Avatar</span>
                             </div>
                         </div>
 
-                        <!-- Floating Interactive Speech & Video Controller -->
+                        <!-- Floating Interactive Speech & Reel Audio Controller -->
                         <div class="voice-player-widget">
-                            <button id="voiceIntroBtn" class="voice-play-btn" title="Click to watch & listen to Rohith speak!">
-                                <i data-lucide="play" id="voicePlayIcon"></i>
+                            <button id="voiceIntroBtn" class="voice-play-btn" title="Click to listen to Rohith speak!">
+                                <i data-lucide="volume-2" id="voicePlayIcon"></i>
                             </button>
                             <div class="voice-info">
-                                <span class="voice-title" id="voiceTitleText">Play Video Intro</span>
+                                <span class="voice-title" id="voiceTitleText">Play Reel Speech</span>
                                 <div class="equalizer-bars" id="equalizerBars">
                                     <span class="eq-bar"></span>
                                     <span class="eq-bar"></span>
@@ -643,7 +643,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
     <script>
         lucide.createIcons();
     </script>
