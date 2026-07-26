@@ -415,9 +415,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --------------------------------------------------------------------------
-       8. REAL-TIME TALKING PHOTO CANVAS & LIP-SYNC ANIMATION ENGINE
+       8. INTERACTIVE VOICE CONTROLLER & AI SPEECH SYNTHESIS ENGINE
        -------------------------------------------------------------------------- */
-    const talkingCanvas = document.getElementById('talkingAvatarCanvas');
     const voiceIntroBtn = document.getElementById('voiceIntroBtn');
     const equalizerBars = document.getElementById('equalizerBars');
     const voicePlayIcon = document.getElementById('voicePlayIcon');
@@ -432,75 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isSpeaking = false;
     const synth = window.speechSynthesis;
     let cachedMaleVoice = null;
-    let avatarImg = new Image();
-    avatarImg.src = './assets/rohith_profile.jpg';
-
-    let animTime = 0;
-    let isBlinking = false;
-
-    function renderTalkingPhoto() {
-        if (!talkingCanvas) return;
-        const ctx = talkingCanvas.getContext('2d');
-        const w = talkingCanvas.width;
-        const h = talkingCanvas.height;
-
-        ctx.clearRect(0, 0, w, h);
-
-        animTime += 1;
-
-        // Subtle idle head sway and breathing
-        const swayY = Math.sin(animTime * 0.03) * 1.5;
-        const scaleSway = 1 + Math.sin(animTime * 0.02) * 0.003;
-
-        ctx.save();
-        ctx.translate(w / 2, h / 2 + swayY);
-        ctx.scale(scaleSway, scaleSway);
-        ctx.translate(-w / 2, -h / 2);
-
-        if (avatarImg.complete) {
-            // Draw Main Image
-            ctx.drawImage(avatarImg, 0, 0, w, h);
-
-            // Lip-Sync Animation while Speaking
-            if (isSpeaking) {
-                const mouthOpen = Math.abs(Math.sin(animTime * 0.25)) * 9;
-                
-                // Crop mouth region from image and stretch dynamically
-                const mouthX = w * 0.44;
-                const mouthY = h * 0.38;
-                const mouthW = w * 0.14;
-                const mouthH = h * 0.06;
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.ellipse(mouthX + mouthW / 2, mouthY + mouthH / 2, mouthW / 2, (mouthH + mouthOpen) / 2, 0, 0, Math.PI * 2);
-                ctx.clip();
-                ctx.drawImage(avatarImg, mouthX, mouthY, mouthW, mouthH + mouthOpen, mouthX, mouthY, mouthW, mouthH + mouthOpen);
-                
-                // Inner mouth shadow for realistic lip movement
-                ctx.fillStyle = 'rgba(40, 10, 10, 0.45)';
-                ctx.fill();
-                ctx.restore();
-            }
-
-            // Periodic Eye Blink
-            if (Math.random() < 0.008) isBlinking = true;
-            if (isBlinking) {
-                ctx.fillStyle = '#1e293b';
-                ctx.fillRect(w * 0.41, h * 0.29, 18, 4);
-                ctx.fillRect(w * 0.54, h * 0.29, 18, 4);
-                setTimeout(() => { isBlinking = false; }, 120);
-            }
-        }
-
-        ctx.restore();
-        requestAnimationFrame(renderTalkingPhoto);
-    }
-
-    avatarImg.onload = () => {
-        renderTalkingPhoto();
-    };
-    if (avatarImg.complete) renderTalkingPhoto();
 
     function selectSoftMaleVoice() {
         if (!synth) return null;
