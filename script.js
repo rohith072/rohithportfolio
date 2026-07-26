@@ -428,6 +428,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isSpeaking = false;
     const synth = window.speechSynthesis;
+    let cachedMaleVoice = null;
+
+    function selectSoftMaleVoice() {
+        if (!synth) return null;
+        const voices = synth.getVoices();
+        if (!voices || voices.length === 0) return null;
+
+        // Female voice names to strictly exclude
+        const femaleKeywords = ['zira', 'hazel', 'susan', 'catherine', 'eva', 'jenny', 'aria', 'female', 'woman', 'samantha', 'victoria', 'karen'];
+        
+        // Preferred male voice keywords
+        const maleKeywords = ['david', 'guy', 'mark', 'george', 'male', 'man', 'richard', 'james', 'google us english', 'natural'];
+
+        // 1. Try finding explicitly named male voice
+        let selected = voices.find(v => 
+            v.lang.startsWith('en') && 
+            maleKeywords.some(m => v.name.toLowerCase().includes(m)) &&
+            !femaleKeywords.some(f => v.name.toLowerCase().includes(f))
+        );
+
+        // 2. Fallback: Any English voice that is NOT in female list
+        if (!selected) {
+            selected = voices.find(v => 
+                v.lang.startsWith('en') && 
+                !femaleKeywords.some(f => v.name.toLowerCase().includes(f))
+            );
+        }
+
+        return selected || voices[0];
+    }
+
+    if (synth && synth.onvoiceschanged !== undefined) {
+        synth.onvoiceschanged = () => { cachedMaleVoice = selectSoftMaleVoice(); };
+    }
 
     function speakText(text, onEndCallback) {
         if (!synth) return;
@@ -435,21 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.rate = 0.95; // Clear soft pace
-        utterance.pitch = 0.95; // Natural male tone
+        utterance.pitch = 0.90; // Deep clear male tone
 
-        // Explicitly search for a clear, soft Male English voice
-        const voices = synth.getVoices();
-        const maleVoice = voices.find(v => 
-            v.lang.startsWith('en') && (
-                v.name.includes('Male') || 
-                v.name.includes('Guy') || 
-                v.name.includes('David') || 
-                v.name.includes('George') || 
-                v.name.includes('Google US English') ||
-                v.name.includes('Natural')
-            )
-        ) || voices.find(v => v.lang.startsWith('en'));
-
+        const maleVoice = cachedMaleVoice || selectSoftMaleVoice();
         if (maleVoice) utterance.voice = maleVoice;
 
         utterance.onstart = () => {
