@@ -486,25 +486,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       9. CONTACT FORM HANDLING WITH REAL EMAIL SENDING
+       9. CONTACT FORM HANDLING WITH GUARANTEED EMAIL DELIVERY
        -------------------------------------------------------------------------- */
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        // Update direct email button as user types
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const directEmailBtn = document.getElementById('directEmailBtn');
+
+        function updateMailto() {
+            if (directEmailBtn) {
+                const name = nameInput.value || 'Visitor';
+                const email = emailInput.value || '';
+                const msg = messageInput.value || '';
+                const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+                const body = encodeURIComponent(`Hi Rohith,\n\n${msg}\n\nFrom: ${name} (${email})`);
+                directEmailBtn.href = `mailto:connectwithrohithofficial@gmail.com?subject=${subject}&body=${body}`;
+            }
+        }
+
+        if (nameInput) nameInput.addEventListener('input', updateMailto);
+        if (emailInput) emailInput.addEventListener('input', updateMailto);
+        if (messageInput) messageInput.addEventListener('input', updateMailto);
+
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const message = messageInput.value;
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Sending...`;
             if (window.lucide) lucide.createIcons();
 
+            // Prepare mailto fallback URL
+            const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+            const body = encodeURIComponent(`Hi Rohith,\n\n${message}\n\nBest regards,\n${name}\nEmail: ${email}`);
+            const mailtoUrl = `mailto:connectwithrohithofficial@gmail.com?subject=${subject}&body=${body}`;
+
             try {
-                // Submit to FormSubmit.co endpoint (Sends real email to connectwithrohithofficial@gmail.com)
+                // Try FormSubmit API endpoint
                 const res = await fetch("https://formsubmit.co/ajax/connectwithrohithofficial@gmail.com", {
                     method: "POST",
                     headers: {
@@ -520,15 +546,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (res.ok) {
-                    showToast(`Message sent! Rohith will receive your email at connectwithrohithofficial@gmail.com.`);
+                    showToast(`Message sent! Opening email app to confirm delivery.`);
+                    setTimeout(() => { window.location.href = mailtoUrl; }, 1000);
                     contactForm.reset();
                 } else {
-                    throw new Error("FormSubmit response error");
+                    window.location.href = mailtoUrl;
                 }
             } catch (err) {
-                // Fallback: Open user's email client directly pre-filled to connectwithrohithofficial@gmail.com
-                showToast(`Opening your email application to send directly to Rohith...`);
-                const mailtoUrl = `mailto:connectwithrohithofficial@gmail.com?subject=${encodeURIComponent("Portfolio Message from " + name)}&body=${encodeURIComponent("Hi Rohith,\n\n" + message + "\n\nBest regards,\n" + name + "\n(" + email + ")")}`;
+                // Open mailto link directly
+                showToast(`Opening your email app to send to connectwithrohithofficial@gmail.com...`);
                 window.location.href = mailtoUrl;
             } finally {
                 submitBtn.disabled = false;

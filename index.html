@@ -603,9 +603,14 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="4" placeholder="Hi Rohith, we would love to interview you for an AI Engineer position..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i data-lucide="send"></i> Send Message
-                        </button>
+                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                            <button type="submit" class="btn btn-primary" style="flex: 1; justify-content: center;">
+                                <i data-lucide="send"></i> Send Message
+                            </button>
+                            <a id="directEmailBtn" href="mailto:connectwithrohithofficial@gmail.com" class="btn btn-glass" style="justify-content: center;">
+                                <i data-lucide="mail"></i> Direct Email
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
