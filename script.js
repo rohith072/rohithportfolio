@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --------------------------------------------------------------------------
-       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WIDGET WITH MALE SPEECH ENGINE
+       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WITH GENERAL & PORTFOLIO AI KNOWLEDGE
        -------------------------------------------------------------------------- */
     const aiBotTrigger = document.getElementById('aiBotTrigger');
     const aiChatWindow = document.getElementById('aiChatWindow');
@@ -435,20 +435,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const voices = synth.getVoices();
         if (!voices || voices.length === 0) return null;
 
-        // Female voice names to strictly exclude
         const femaleKeywords = ['zira', 'hazel', 'susan', 'catherine', 'eva', 'jenny', 'aria', 'female', 'woman', 'samantha', 'victoria', 'karen'];
-        
-        // Preferred male voice keywords
         const maleKeywords = ['david', 'guy', 'mark', 'george', 'male', 'man', 'richard', 'james', 'google us english', 'natural'];
 
-        // 1. Try finding explicitly named male voice
         let selected = voices.find(v => 
             v.lang.startsWith('en') && 
             maleKeywords.some(m => v.name.toLowerCase().includes(m)) &&
             !femaleKeywords.some(f => v.name.toLowerCase().includes(f))
         );
 
-        // 2. Fallback: Any English voice that is NOT in female list
         if (!selected) {
             selected = voices.find(v => 
                 v.lang.startsWith('en') && 
@@ -465,11 +460,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function speakText(text, onEndCallback) {
         if (!synth) return;
-        synth.cancel(); // Stop any active speech
+        synth.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.95; // Clear soft pace
-        utterance.pitch = 0.90; // Deep clear male tone
+        utterance.rate = 0.88;  // Soft, relaxed, clear speech pace
+        utterance.pitch = 0.85; // Calming, soft male pitch
+        utterance.volume = 0.9;
 
         const maleVoice = cachedMaleVoice || selectSoftMaleVoice();
         if (maleVoice) utterance.voice = maleVoice;
@@ -495,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hero Voice Intro Play/Pause Listener
     if (voiceIntroBtn) {
-        const introSpeechText = "Hi there! Welcome to my portfolio. I am Rohith K, an Electrical and Electronics Engineer specializing in AI, Machine Learning, Deep Learning, Computer Vision, and Flutter mobile applications. Explore my projects below or ask my AI assistant any questions!";
+        const introSpeechText = "Hello, welcome to my portfolio! I am Rohith K, an Electrical and Electronics Engineer specializing in AI, Machine Learning, Deep Learning, Computer Vision, and Flutter app development. Feel free to explore my work or ask my AI assistant any question!";
 
         voiceIntroBtn.addEventListener('click', () => {
             if (isSpeaking) {
@@ -521,35 +517,86 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Knowledgebase answers derived directly from Rohith's resume
+    // Comprehensive Knowledgebase (Portfolio Specific + General AI Knowledge)
     const kb = [
+        // Rohith's Specific Portfolio Knowledge
         {
             keywords: ['project', 'attendance', 'face', 'opencv', 'lbph'],
-            answer: "Rohith built an AI-Based Smart Classroom Attendance System using OpenCV & LBPH face recognition with 2-of-3 frame verification, achieving 95%+ accuracy and reducing attendance recording time by 90%!"
+            answer: "Rohith built an AI-Based Smart Classroom Attendance System using OpenCV & LBPH face recognition with 2-of-3 frame verification, achieving 95%+ accuracy and reducing recording time by 90%."
         },
         {
-            keywords: ['crop', 'disease', 'agriculture', 'tensorflow', 'keras'],
-            answer: "Rohith developed an ML Crop Disease Detection platform using TensorFlow/Keras image classification to detect 5+ crop diseases with >90% accuracy, integrated with a Flutter mobile app!"
+            keywords: ['crop', 'disease', 'agriculture', 'tensorflow', 'keras', 'plant'],
+            answer: "Rohith developed an ML Crop Disease Detection platform using TensorFlow/Keras image classification to detect 5+ crop diseases with over 90% accuracy, integrated with a Flutter mobile application."
         },
         {
             keywords: ['defect', 'quality', 'manufacturing', 'inspection'],
-            answer: "Rohith created a Quality Control AI for automated manufacturing defect detection using OpenCV, which sped up inspection by ~70%."
+            answer: "Rohith created a Quality Control AI system for automated manufacturing defect detection using OpenCV, speeding up quality inspection by approximately 70%."
         },
         {
-            keywords: ['cgpa', 'college', 'education', 'marks', 'degree', 'study'],
-            answer: "Rohith is pursuing B.E. in Electrical and Electronics Engineering at Dr. Mahalingam College of Engineering and Technology, Coimbatore, with a strong CGPA of 8.013!"
+            keywords: ['ration', 'iot', 'arduino', 'distribution'],
+            answer: "Rohith designed a Smart Ration Distribution Platform combining a Flutter mobile application with Arduino embedded firmware for real-time stock tracking and automated inventory management."
         },
         {
-            keywords: ['skill', 'python', 'flutter', 'dart', 'tools', 'languages'],
-            answer: "Rohith's top skills include Python, OpenCV, TensorFlow, Deep Learning, Computer Vision, Flutter, Flask, SQLite, C, Java, and Git."
+            keywords: ['staff', 'tracker', 'faculty', 'campus', 'availability'],
+            answer: "Rohith created a Staff Availability Tracker App in Flutter enabling campus students to locate available faculty and department staff in real time."
         },
         {
-            keywords: ['contact', 'email', 'phone', 'hire', 'linkedin', 'github'],
-            answer: "You can reach Rohith directly at connectwithrohithofficial@gmail.com, phone +91 9037193207, or connect on LinkedIn and GitHub!"
+            keywords: ['cgpa', 'college', 'education', 'marks', 'degree', 'study', 'university', 'mcet'],
+            answer: "Rohith is pursuing a B.E. in Electrical and Electronics Engineering at Dr. Mahalingam College of Engineering and Technology, Coimbatore, maintaining a high CGPA of 8.013."
         },
         {
-            keywords: ['hackathon', 'vcet', 'achievement', 'certificate'],
-            answer: "Rohith participated in the IEEE-sponsored VCET HackElite 24-Hour National Hackathon, Drone Lab Workshop, and holds a Microsoft Excel Certification!"
+            keywords: ['skill', 'languages', 'tech stack', 'what do you know', 'programming'],
+            answer: "Rohith's technical skills include Python, Machine Learning, Deep Learning, Computer Vision, OpenCV, TensorFlow, Keras, Flutter, Dart, Flask, SQLite, C, Java, and Git."
+        },
+        {
+            keywords: ['contact', 'email', 'phone', 'hire', 'linkedin', 'github', 'reach'],
+            answer: "You can reach Rohith directly via email at connectwithrohithofficial@gmail.com, call +91 9037193207, or connect on LinkedIn (rohith23112004) and GitHub (rohith072)."
+        },
+        {
+            keywords: ['hackathon', 'vcet', 'achievement', 'certificate', 'award', 'drone'],
+            answer: "Rohith participated in the IEEE VCET HackElite 24-Hour National Technical Hackathon, completed the Drone Lab Workshop, and holds a Microsoft Excel Certification."
+        },
+        {
+            keywords: ['who are you', 'about rohith', 'tell me about rohith', 'intro'],
+            answer: "Rohith K is a motivated AI/ML & Software Engineer from Coimbatore specializing in Computer Vision, Deep Learning, Python, and Flutter app development."
+        },
+
+        // General Knowledge & Tech QA Engine
+        {
+            keywords: ['machine learning', 'what is ml'],
+            answer: "Machine Learning is a subset of AI where systems learn patterns from data to make predictions or decisions without being explicitly programmed."
+        },
+        {
+            keywords: ['deep learning', 'what is dl', 'neural network'],
+            answer: "Deep Learning is an advanced ML technique using multi-layered artificial neural networks (like CNNs and RNNs) to analyze complex data such as images, video, audio, and text."
+        },
+        {
+            keywords: ['computer vision', 'opencv', 'image processing'],
+            answer: "Computer Vision is a field of AI that enables computers to interpret and extract meaningful information from visual inputs like digital images and camera feeds. OpenCV is a popular library for this!"
+        },
+        {
+            keywords: ['flutter', 'dart', 'mobile dev'],
+            answer: "Flutter is Google's open-source UI toolkit for building beautiful, natively compiled cross-platform applications for mobile, web, and desktop from a single Dart codebase."
+        },
+        {
+            keywords: ['python', 'what is python'],
+            answer: "Python is a versatile, high-level programming language widely used in AI, Machine Learning, Data Science, Data Analytics, and Web Backend development."
+        },
+        {
+            keywords: ['tensorflow', 'keras', 'pytorch'],
+            answer: "TensorFlow and PyTorch are leading open-source deep learning frameworks used for building, training, and deploying neural network models."
+        },
+        {
+            keywords: ['flask', 'rest api', 'backend'],
+            answer: "Flask is a lightweight Python web framework used for building web servers and RESTful APIs to connect AI models to front-end mobile and web apps."
+        },
+        {
+            keywords: ['hello', 'hi', 'hey', 'greetings'],
+            answer: "Hello! I am Rohith's AI Assistant. How can I help you today? You can ask me about Rohith's background or any general engineering question!"
+        },
+        {
+            keywords: ['how are you', 'how r u'],
+            answer: "I am doing great! Ready to answer your questions about Rohith K or any tech topics you'd like to discuss."
         }
     ];
 
@@ -563,13 +610,17 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.appendChild(userDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Process Bot Answer
         const lower = text.toLowerCase();
         let match = kb.find(item => item.keywords.some(k => lower.includes(k)));
 
-        let reply = match 
-            ? match.answer 
-            : "Rohith is a skilled EEE student specializing in AI/ML, Computer Vision, and Flutter apps with an 8.013 CGPA. Feel free to ask about his projects, skills, or contact email!";
+        let reply = "";
+        if (match) {
+            reply = match.answer;
+        } else if (lower.includes('why') || lower.includes('how') || lower.includes('what') || lower.includes('explain')) {
+            reply = `That is a great question! While I am tailored to answer questions about Rohith's AI/ML projects and skills, I can tell you that Rohith specializes in building intelligent systems to solve real-world problems. Feel free to ask about his Computer Vision, Flutter, or Deep Learning work!`;
+        } else {
+            reply = `Thanks for asking! Rohith is an AI/ML and Software Engineer skilled in Python, Deep Learning, OpenCV, and Flutter. Feel free to ask about his projects, CGPA, or technical background!`;
+        }
 
         setTimeout(() => {
             const botDiv = document.createElement('div');
@@ -578,9 +629,9 @@ document.addEventListener('DOMContentLoaded', () => {
             chatMessages.appendChild(botDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Speak response aloud!
+            // Speak response aloud in soft male voice!
             speakText(reply);
-        }, 400);
+        }, 350);
     }
 
     if (chatForm) {
