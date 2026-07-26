@@ -36,7 +36,7 @@
         <div class="nav-container">
             <a href="#hero" class="nav-brand">
                 <span class="brand-badge"><i data-lucide="sparkles"></i></span>
-                <span class="brand-text">ROHITH <span class="highlight">K</span></span>
+                <span class="brand-text">ROHITH K</span>
             </a>
             
             <ul class="nav-links">
@@ -52,8 +52,8 @@
                 <a href="./assets/Rohith_K_Resume.pdf" download="Rohith_K_Resume.pdf" class="btn btn-outline btn-sm glow-on-hover">
                     <i data-lucide="download"></i> <span>Resume</span>
                 </a>
-                <button class="sound-toggle-btn" id="soundToggle" title="Toggle Ambient Audio Beats">
-                    <i data-lucide="volume-x" id="soundIcon"></i>
+                <button class="theme-toggle-btn" id="themeToggle" title="Toggle Dark / Light Mode">
+                    <i data-lucide="sun" id="themeIcon"></i>
                 </button>
             </div>
         </div>
@@ -345,22 +345,7 @@
                 <!-- Project 5 -->
                 <div class="project-card glass-card" data-category="mobile" data-tilt>
                     <div class="project-img-wrapper">
-                        <div class="project-code-preview">
-                            <div class="code-header">
-                                <span class="dot red"></span>
-                                <span class="dot yellow"></span>
-                                <span class="dot green"></span>
-                                <span class="code-title">faculty_tracker.dart</span>
-                            </div>
-                            <pre><code>void trackFacultyStatus() {
-  StreamSubscription sub = 
-    FirebaseDatabase.instance
-      .ref("faculty")
-      .onValue.listen((event) {
-        updateMapUI(event.snapshot);
-      });
-}</code></pre>
-                        </div>
+                        <img src="./assets/staff_tracker.jpg" alt="Staff Availability Tracker App" class="project-img">
                         <div class="project-overlay">
                             <button class="btn btn-sm btn-primary view-project-btn" data-project="5">
                                 <i data-lucide="eye"></i> Interactive Demo

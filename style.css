@@ -217,10 +217,10 @@ h1, h2, h3, h4 {
     gap: 1rem;
 }
 
-.sound-toggle-btn {
-    background: rgba(255, 255, 255, 0.05);
+.theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border-color);
-    color: #94a3b8;
+    color: #f1f5f9;
     width: 40px;
     height: 40px;
     border-radius: 12px;
@@ -231,9 +231,65 @@ h1, h2, h3, h4 {
     transition: var(--transition-fast);
 }
 
-.sound-toggle-btn:hover {
+.theme-toggle-btn:hover {
     color: var(--primary-cyan);
     border-color: var(--primary-cyan);
+}
+
+/* Light Theme Mode Overrides */
+body.light-theme {
+    --bg-dark: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-card-hover: rgba(241, 245, 249, 0.95);
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-glow: rgba(0, 242, 254, 0.5);
+    color: #0f172a;
+}
+
+body.light-theme .navbar.scrolled {
+    background: rgba(248, 250, 252, 0.92);
+}
+
+body.light-theme .nav-brand {
+    color: #0f172a;
+}
+
+body.light-theme .nav-link {
+    color: #334155;
+}
+
+body.light-theme .nav-link:hover {
+    color: #0284c7;
+}
+
+body.light-theme .hero-subtitle,
+body.light-theme .hero-description,
+body.light-theme .project-desc,
+body.light-theme .timeline-details,
+body.light-theme .main-bio p,
+body.light-theme .section-subtitle {
+    color: #334155;
+}
+
+body.light-theme .glass-card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .theme-toggle-btn {
+    background: rgba(0, 0, 0, 0.06);
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-info-card {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.light-theme .form-group input, 
+body.light-theme .form-group textarea {
+    background: #fff;
+    color: #0f172a;
+    border-color: #cbd5e1;
 }
 
 /* Button Component Styles */

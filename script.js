@@ -389,7 +389,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WIDGET WITH SPEECH SYNTHESIS
+       0. DARK / LIGHT THEME TOGGLE SWITCHER
+       -------------------------------------------------------------------------- */
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // Load saved theme or default to dark
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        if (themeIcon) themeIcon.setAttribute('data-lucide', 'moon');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+            
+            if (themeIcon) {
+                themeIcon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+                if (window.lucide) lucide.createIcons();
+            }
+        });
+    }
+
+    /* --------------------------------------------------------------------------
+       8. INTERACTIVE "ASK ROHITH AI" CHATBOT WIDGET WITH MALE SPEECH ENGINE
        -------------------------------------------------------------------------- */
     const aiBotTrigger = document.getElementById('aiBotTrigger');
     const aiChatWindow = document.getElementById('aiChatWindow');
@@ -408,13 +434,23 @@ document.addEventListener('DOMContentLoaded', () => {
         synth.cancel(); // Stop any active speech
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 1.0;
-        utterance.pitch = 1.0;
+        utterance.rate = 0.95; // Clear soft pace
+        utterance.pitch = 0.95; // Natural male tone
 
-        // Try selecting a smooth natural English voice if available
+        // Explicitly search for a clear, soft Male English voice
         const voices = synth.getVoices();
-        const preferredVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Male')));
-        if (preferredVoice) utterance.voice = preferredVoice;
+        const maleVoice = voices.find(v => 
+            v.lang.startsWith('en') && (
+                v.name.includes('Male') || 
+                v.name.includes('Guy') || 
+                v.name.includes('David') || 
+                v.name.includes('George') || 
+                v.name.includes('Google US English') ||
+                v.name.includes('Natural')
+            )
+        ) || voices.find(v => v.lang.startsWith('en'));
+
+        if (maleVoice) utterance.voice = maleVoice;
 
         utterance.onstart = () => {
             isSpeaking = true;
@@ -578,54 +614,6 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.style.transform = 'translateX(-100%)';
             setTimeout(() => toast.remove(), 300);
         }, 4000);
-    }
-
-    /* --------------------------------------------------------------------------
-       10. AMBIENT AUDIO BEAT TOGGLE (OPTIONAL)
-       -------------------------------------------------------------------------- */
-    const soundToggle = document.getElementById('soundToggle');
-    const soundIcon = document.getElementById('soundIcon');
-    let isPlayingAudio = false;
-    let audioCtx = null;
-    let osc = null;
-
-    if (soundToggle) {
-        soundToggle.addEventListener('click', () => {
-            isPlayingAudio = !isPlayingAudio;
-            if (isPlayingAudio) {
-                soundToggle.style.color = 'var(--primary-cyan)';
-                soundToggle.style.borderColor = 'var(--primary-cyan)';
-                showToast("Ambient Cyber Beats Enabled");
-                playAmbientTone();
-            } else {
-                soundToggle.style.color = '#94a3b8';
-                soundToggle.style.borderColor = 'var(--border-color)';
-                showToast("Ambient Audio Muted");
-                stopAmbientTone();
-            }
-        });
-    }
-
-    function playAmbientTone() {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(110, audioCtx.currentTime); // Low chill A2 tone
-        gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-    }
-
-    function stopAmbientTone() {
-        if (osc) {
-            osc.stop();
-            osc.disconnect();
-            osc = null;
-        }
     }
 
 });
