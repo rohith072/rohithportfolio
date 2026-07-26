@@ -503,7 +503,134 @@ body.light-theme .form-group textarea {
     flex-wrap: wrap;
 }
 
-/* Viral Hero Section Styles (Instagram Reel Inspired) */
+/* Skill Radar & Interactive 3D Orbs Styles */
+.skill-radar-container {
+    padding: 2.2rem;
+    margin-bottom: 2rem;
+}
+
+.radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.radar-canvas-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.radar-orbs-box h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+
+.orbs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skill-orb {
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-orb:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.skill-orb.cyan { background: rgba(0, 242, 254, 0.12); color: var(--primary-cyan); border: 1px solid rgba(0, 242, 254, 0.3); }
+.skill-orb.cyan:hover { box-shadow: 0 8px 25px rgba(0, 242, 254, 0.4); }
+
+.skill-orb.violet { background: rgba(138, 43, 226, 0.12); color: var(--primary-violet); border: 1px solid rgba(138, 43, 226, 0.3); }
+.skill-orb.violet:hover { box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4); }
+
+.skill-orb.emerald { background: rgba(16, 185, 129, 0.12); color: var(--primary-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+.skill-orb.emerald:hover { box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); }
+
+.skill-orb.amber { background: rgba(245, 158, 11, 0.12); color: var(--primary-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+.skill-orb.amber:hover { box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); }
+
+.skill-orb.rose { background: rgba(244, 63, 94, 0.12); color: var(--primary-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+.skill-orb.rose:hover { box-shadow: 0 8px 25px rgba(244, 63, 94, 0.4); }
+
+/* Certifications Section Grid */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.cert-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.cert-icon-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+}
+
+.cert-icon-box.violet { background: rgba(138, 43, 226, 0.15); color: var(--primary-violet); border: 1px solid rgba(138, 43, 226, 0.3); }
+.cert-icon-box.cyan { background: rgba(0, 242, 254, 0.15); color: var(--primary-cyan); border: 1px solid rgba(0, 242, 254, 0.3); }
+.cert-icon-box.emerald { background: rgba(16, 185, 129, 0.15); color: var(--primary-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+.cert-icon-box.amber { background: rgba(245, 158, 11, 0.15); color: var(--primary-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+.cert-badge-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 0.6rem;
+    align-self: flex-start;
+}
+
+.cert-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+}
+
+.cert-issuer {
+    color: var(--primary-cyan);
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.cert-desc {
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
 .viral-hero {
     position: relative;
     padding: 3rem 0;

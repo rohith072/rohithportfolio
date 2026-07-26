@@ -706,19 +706,121 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function showToast(msg) {
-        const toastContainer = document.getElementById('toastContainer');
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = `<i data-lucide="check-circle" style="color: var(--primary-cyan);"></i> <span>${msg}</span>`;
-        toastContainer.appendChild(toast);
-        lucide.createIcons();
+    /* --------------------------------------------------------------------------
+       10. INTERACTIVE SKILL RADAR CANVAS RENDERER
+       -------------------------------------------------------------------------- */
+    const radarCanvas = document.getElementById('skillRadarCanvas');
+    if (radarCanvas) {
+        const ctx = radarCanvas.getContext('2d');
+        const labels = ['AI & ML', 'Computer Vision', 'Flutter & Mobile', 'Python Analytics', 'Embedded (EEE)', 'Flask & DB'];
+        const values = [0.92, 0.90, 0.88, 0.92, 0.82, 0.85];
+        const numAxes = labels.length;
+        const centerX = radarCanvas.width / 2;
+        const centerY = radarCanvas.height / 2;
+        const radius = 120;
 
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(-100%)';
-            setTimeout(() => toast.remove(), 300);
-        }, 4000);
+        function drawRadar() {
+            ctx.clearRect(0, 0, radarCanvas.width, radarCanvas.height);
+
+            // Draw concentric web rings
+            for (let ring = 1; ring <= 4; ring++) {
+                ctx.beginPath();
+                const r = (radius / 4) * ring;
+                for (let i = 0; i < numAxes; i++) {
+                    const angle = (Math.PI * 2 / numAxes) * i - Math.PI / 2;
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY + r * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // Draw axis lines and labels
+            for (let i = 0; i < numAxes; i++) {
+                const angle = (Math.PI * 2 / numAxes) * i - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = 'rgba(0, 242, 254, 0.2)';
+                ctx.stroke();
+
+                // Draw Text Labels
+                const labelX = centerX + (radius + 24) * Math.cos(angle);
+                const labelY = centerY + (radius + 20) * Math.sin(angle);
+                ctx.font = '11px Plus Jakarta Sans, sans-serif';
+                ctx.fillStyle = '#cbd5e1';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[i], labelX, labelY);
+            }
+
+            // Draw Skill Polygon Area
+            ctx.beginPath();
+            for (let i = 0; i < numAxes; i++) {
+                const angle = (Math.PI * 2 / numAxes) * i - Math.PI / 2;
+                const r = radius * values[i];
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY + r * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
+            ctx.fill();
+            ctx.strokeStyle = '#00f2fe';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Data Points
+            for (let i = 0; i < numAxes; i++) {
+                const angle = (Math.PI * 2 / numAxes) * i - Math.PI / 2;
+                const r = radius * values[i];
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY + r * Math.sin(angle);
+
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = '#ff5e62';
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+        }
+        drawRadar();
+    }
+
+    /* --------------------------------------------------------------------------
+       11. RESUME PDF MODAL VIEWER HANDLER
+       -------------------------------------------------------------------------- */
+    const openResumeBtn = document.getElementById('openResumeBtn');
+    const resumeModal = document.getElementById('resumeModal');
+    const resumeModalClose = document.getElementById('resumeModalClose');
+
+    if (openResumeBtn && resumeModal) {
+        openResumeBtn.addEventListener('click', () => {
+            resumeModal.classList.remove('hidden');
+        });
+    }
+
+    if (resumeModalClose && resumeModal) {
+        resumeModalClose.addEventListener('click', () => {
+            resumeModal.classList.add('hidden');
+        });
+    }
+
+    if (resumeModal) {
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                resumeModal.classList.add('hidden');
+            }
+        });
     }
 
 });

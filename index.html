@@ -93,9 +93,9 @@
                         <a href="#contact" class="btn btn-glass">
                             <i data-lucide="mail"></i> Contact Me
                         </a>
-                        <a href="./assets/Rohith_K_Resume.pdf" target="_blank" class="btn btn-glass" title="Download Resume">
-                            <i data-lucide="file-text"></i> Resume PDF
-                        </a>
+                        <button id="openResumeBtn" class="btn btn-glass" title="View Resume PDF">
+                            <i data-lucide="file-text"></i> View Resume PDF
+                        </button>
                     </div>
                 </div>
 
@@ -367,14 +367,38 @@
             </div>
         </section>
 
-        <!-- Technical Skills Section -->
+        <!-- Technical Skills Section with Interactive Skill Radar -->
         <section id="skills" class="section skills-section">
             <div class="section-header">
                 <span class="section-badge"><i data-lucide="layers"></i> TECH SPECTRUM</span>
-                <h2 class="section-title">Technical <span class="gradient-text">Stack & Tools</span></h2>
+                <h2 class="section-title">Technical <span class="gradient-text">Stack & Radar</span></h2>
+                <p class="section-subtitle">Interactive 3D Radar Chart visualizing proficiency across AI, Computer Vision, and Mobile engineering</p>
             </div>
 
-            <div class="bento-skills-grid">
+            <!-- Skill Radar & Orbs Section -->
+            <div class="skill-radar-container glass-card">
+                <div class="radar-grid">
+                    <div class="radar-canvas-box">
+                        <canvas id="skillRadarCanvas" width="400" height="360"></canvas>
+                    </div>
+                    <div class="radar-orbs-box">
+                        <h3>Interactive Tech Stack Orbs</h3>
+                        <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.2rem;">Hover over orbs to highlight core engineering domains</p>
+                        <div class="orbs-grid">
+                            <div class="skill-orb cyan" data-domain="ai"><i data-lucide="cpu"></i> Python</div>
+                            <div class="skill-orb violet" data-domain="cv"><i data-lucide="eye"></i> OpenCV</div>
+                            <div class="skill-orb emerald" data-domain="ai"><i data-lucide="brain"></i> TensorFlow</div>
+                            <div class="skill-orb amber" data-domain="mobile"><i data-lucide="smartphone"></i> Flutter</div>
+                            <div class="skill-orb rose" data-domain="backend"><i data-lucide="server"></i> Flask</div>
+                            <div class="skill-orb cyan" data-domain="embedded"><i data-lucide="zap"></i> C / Arduino</div>
+                            <div class="skill-orb violet" data-domain="backend"><i data-lucide="database"></i> SQLite</div>
+                            <div class="skill-orb emerald" data-domain="tools"><i data-lucide="git-branch"></i> Git / GitHub</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-skills-grid" style="margin-top: 2rem;">
                 <!-- Skill Category 1 -->
                 <div class="skill-category-card glass-card">
                     <div class="category-header">
@@ -430,7 +454,7 @@
                 <!-- Skill Category 3 -->
                 <div class="skill-category-card glass-card">
                     <div class="category-header">
-                        <div class="cat-icon emerald"><i data-lucide="layout flex"></i></div>
+                        <div class="cat-icon emerald"><i data-lucide="layout"></i></div>
                         <h3>Mobile, Backend & Tools</h3>
                     </div>
                     <div class="skills-list">
@@ -451,6 +475,48 @@
                             <div class="progress-bar"><div class="progress-fill emerald" style="width: 90%"></div></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Hackathons Gallery Section -->
+        <section id="certifications" class="section cert-section">
+            <div class="section-header">
+                <span class="section-badge"><i data-lucide="award"></i> HONORS & VERIFICATION</span>
+                <h2 class="section-title">Certifications & <span class="gradient-text">Hackathons</span></h2>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card glass-card" data-tilt>
+                    <div class="cert-icon-box violet"><i data-lucide="trophy"></i></div>
+                    <div class="cert-badge-tag">IEEE National Event</div>
+                    <h3>VCET HackElite Hackathon</h3>
+                    <p class="cert-issuer">24-Hour National Level Technical Hackathon</p>
+                    <p class="cert-desc">Demonstrated high-speed AI prototyping, team leadership, and real-time problem solving under time constraints.</p>
+                </div>
+
+                <div class="cert-card glass-card" data-tilt>
+                    <div class="cert-icon-box cyan"><i data-lucide="cpu"></i></div>
+                    <div class="cert-badge-tag">Hands-on Technical</div>
+                    <h3>Drone Lab Workshop</h3>
+                    <p class="cert-issuer">Drone Mechanics & Sensor Integration</p>
+                    <p class="cert-desc">Completed practical training on drone aerodynamics, embedded sensor integration, and flight controller setup.</p>
+                </div>
+
+                <div class="cert-card glass-card" data-tilt>
+                    <div class="cert-icon-box emerald"><i data-lucide="sheet"></i></div>
+                    <div class="cert-badge-tag">Certified Skill</div>
+                    <h3>Microsoft Excel Certification</h3>
+                    <p class="cert-issuer">Microsoft Data Analytics</p>
+                    <p class="cert-desc">Certified in advanced data analytics, statistical modeling, data visualization, and automated Excel formulas.</p>
+                </div>
+
+                <div class="cert-card glass-card" data-tilt>
+                    <div class="cert-icon-box amber"><i data-lucide="heart"></i></div>
+                    <div class="cert-badge-tag">Social Leadership</div>
+                    <h3>National Service Scheme (NSS)</h3>
+                    <p class="cert-issuer">Community Volunteer Leader</p>
+                    <p class="cert-desc">Led student technology literacy drives, social impact initiatives, and environmental sustainability campaigns.</p>
                 </div>
             </div>
         </section>
@@ -613,6 +679,28 @@
         </div>
     </div>
 
+    <!-- Resume PDF Modal Viewer -->
+    <div class="modal-backdrop hidden" id="resumeModal">
+        <div class="modal-card glass-card" style="max-width: 850px; height: 90vh; display: flex; flex-direction: column; padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <i data-lucide="file-text" style="color: var(--primary-cyan);"></i>
+                    <h3 style="font-size: 1.2rem; font-weight: 700;">Rohith K - Resume PDF Preview</h3>
+                </div>
+                <div style="display: flex; gap: 0.8rem; align-items: center;">
+                    <a href="./assets/Rohith_K_Resume.pdf" download="Rohith_K_Resume.pdf" class="btn btn-primary btn-sm">
+                        <i data-lucide="download"></i> Download PDF
+                    </a>
+                    <button class="modal-close" id="resumeModalClose" style="position: static;"><i data-lucide="x"></i></button>
+                </div>
+            </div>
+            
+            <div style="flex-grow: 1; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--border-color);">
+                <iframe src="./assets/Rohith_K_Resume.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Project Interactive Detail Modal -->
     <div class="modal-backdrop hidden" id="projectModal">
         <div class="modal-card glass-card">
@@ -639,7 +727,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=9"></script>
     <script>
         lucide.createIcons();
     </script>
