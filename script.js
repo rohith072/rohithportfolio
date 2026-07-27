@@ -434,17 +434,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const synth = window.speechSynthesis;
     let cachedMaleVoice = null;
 
-    function selectSoftMaleVoice() {
+    function selectYouthfulMaleVoice() {
         if (!synth) return null;
         const voices = synth.getVoices();
         if (!voices || voices.length === 0) return null;
 
         const femaleKeywords = ['zira', 'hazel', 'susan', 'catherine', 'eva', 'jenny', 'aria', 'female', 'woman', 'samantha', 'victoria', 'karen'];
-        const maleKeywords = ['guy', 'david', 'mark', 'george', 'male', 'man', 'richard', 'james', 'google us english', 'natural'];
+        const youthfulMaleKeywords = ['guy', 'google us english', 'david', 'mark', 'george', 'male', 'man', 'richard', 'james', 'natural'];
 
         let selected = voices.find(v => 
             v.lang.startsWith('en') && 
-            maleKeywords.some(m => v.name.toLowerCase().includes(m)) &&
+            youthfulMaleKeywords.some(m => v.name.toLowerCase().includes(m)) &&
             !femaleKeywords.some(f => v.name.toLowerCase().includes(f))
         );
 
@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (synth && synth.onvoiceschanged !== undefined) {
-        synth.onvoiceschanged = () => { cachedMaleVoice = selectSoftMaleVoice(); };
+        synth.onvoiceschanged = () => { cachedMaleVoice = selectYouthfulMaleVoice(); };
     }
 
     function speakText(text, onEndCallback) {
@@ -467,11 +467,11 @@ document.addEventListener('DOMContentLoaded', () => {
         synth.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.85;  // Extra soft, calm, relaxed pace
-        utterance.pitch = 0.82; // Warm, natural male tone
+        utterance.rate = 0.96;  // Natural, clear conversational speed
+        utterance.pitch = 1.05; // Youthful 21-year-old soft male pitch
         utterance.volume = 0.95;
 
-        const maleVoice = cachedMaleVoice || selectSoftMaleVoice();
+        const maleVoice = cachedMaleVoice || selectYouthfulMaleVoice();
         if (maleVoice) utterance.voice = maleVoice;
 
         utterance.onstart = () => {
