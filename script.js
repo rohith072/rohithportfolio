@@ -415,12 +415,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --------------------------------------------------------------------------
-       8. INTERACTIVE VOICE CONTROLLER & AI SPEECH SYNTHESIS ENGINE
+       8. INTERACTIVE VOICE CONTROLLER & SOFT MALE SPEECH ENGINE
        -------------------------------------------------------------------------- */
     const voiceIntroBtn = document.getElementById('voiceIntroBtn');
     const equalizerBars = document.getElementById('equalizerBars');
     const voicePlayIcon = document.getElementById('voicePlayIcon');
     const voiceTitleText = document.getElementById('voiceTitleText');
+    const heroStaticImg = document.getElementById('heroStaticImg');
+    const heroIntroVideo = document.getElementById('heroIntroVideo');
     const aiBotTrigger = document.getElementById('aiBotTrigger');
     const aiChatWindow = document.getElementById('aiChatWindow');
     const chatClose = document.getElementById('chatClose');
@@ -438,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!voices || voices.length === 0) return null;
 
         const femaleKeywords = ['zira', 'hazel', 'susan', 'catherine', 'eva', 'jenny', 'aria', 'female', 'woman', 'samantha', 'victoria', 'karen'];
-        const maleKeywords = ['david', 'guy', 'mark', 'george', 'male', 'man', 'richard', 'james', 'google us english', 'natural'];
+        const maleKeywords = ['guy', 'david', 'mark', 'george', 'male', 'man', 'richard', 'james', 'google us english', 'natural'];
 
         let selected = voices.find(v => 
             v.lang.startsWith('en') && 
@@ -465,8 +467,8 @@ document.addEventListener('DOMContentLoaded', () => {
         synth.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.88;
-        utterance.pitch = 0.85;
+        utterance.rate = 0.85;  // Extra soft, calm, relaxed pace
+        utterance.pitch = 0.82; // Warm, natural male tone
         utterance.volume = 0.95;
 
         const maleVoice = cachedMaleVoice || selectSoftMaleVoice();
@@ -494,20 +496,48 @@ document.addEventListener('DOMContentLoaded', () => {
         synth.speak(utterance);
     }
 
-    // Hero Voice Intro Controller
+    // Hero Voice / Video Intro Controller
     if (voiceIntroBtn) {
         const introSpeechText = "Hello, welcome to my portfolio! I am Rohith K, an Electrical and Electronics Engineer specializing in AI, Machine Learning, Deep Learning, Computer Vision, and Flutter app development. Feel free to explore my work or ask my AI assistant any question!";
 
         voiceIntroBtn.addEventListener('click', () => {
-            if (isSpeaking) {
-                synth.cancel();
-                isSpeaking = false;
-                if (equalizerBars) equalizerBars.classList.remove('active');
-                if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
+            // Check if user uploaded a real speaking video (assets/rohith_intro.mp4)
+            if (heroIntroVideo && heroIntroVideo.readyState >= 1) {
+                if (heroIntroVideo.paused) {
+                    if (synth) synth.cancel();
+                    if (heroStaticImg) heroStaticImg.style.display = 'none';
+                    heroIntroVideo.style.display = 'block';
+                    heroIntroVideo.play();
+                    if (voiceTitleText) voiceTitleText.textContent = "Mute Intro";
+                    if (equalizerBars) equalizerBars.classList.add('active');
+                } else {
+                    heroIntroVideo.pause();
+                    if (heroStaticImg) heroStaticImg.style.display = 'block';
+                    heroIntroVideo.style.display = 'none';
+                    if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
+                    if (equalizerBars) equalizerBars.classList.remove('active');
+                }
             } else {
-                speakText(introSpeechText);
+                // Soft AI voice speech fallback
+                if (isSpeaking) {
+                    synth.cancel();
+                    isSpeaking = false;
+                    if (equalizerBars) equalizerBars.classList.remove('active');
+                    if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
+                } else {
+                    speakText(introSpeechText);
+                }
             }
         });
+
+        if (heroIntroVideo) {
+            heroIntroVideo.addEventListener('ended', () => {
+                if (heroStaticImg) heroStaticImg.style.display = 'block';
+                heroIntroVideo.style.display = 'none';
+                if (voiceTitleText) voiceTitleText.textContent = "Listen to Intro";
+                if (equalizerBars) equalizerBars.classList.remove('active');
+            });
+        }
     }
 
     if (aiBotTrigger) {
