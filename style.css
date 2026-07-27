@@ -3,25 +3,26 @@
    ========================================================================== */
 
 :root {
-    /* Color Palette */
-    --bg-dark: #070913;
-    --bg-card: rgba(15, 23, 42, 0.65);
-    --bg-card-hover: rgba(24, 34, 60, 0.85);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-glow: rgba(0, 242, 254, 0.3);
+    /* Color Palette - Instagram Reel DZOdaolpCNa Aesthetic */
+    --bg-dark: #060812;
+    --bg-card: rgba(15, 20, 35, 0.7);
+    --bg-card-hover: rgba(25, 32, 55, 0.9);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-glow: rgba(255, 59, 48, 0.45);
     
-    /* Neon Accents */
+    /* Viral Reel Accents */
+    --primary-red: #ff3b30;
+    --primary-coral: #ff5e62;
     --primary-cyan: #00f2fe;
     --primary-violet: #8a2be2;
     --primary-emerald: #10b981;
     --primary-amber: #f59e0b;
-    --primary-rose: #f43f5e;
 
     /* Gradients */
-    --grad-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    --grad-primary: linear-gradient(135deg, #ff3b30 0%, #ff5e62 100%);
     --grad-violet: linear-gradient(135deg, #8a2be2 0%, #7f00ff 100%);
-    --grad-text: linear-gradient(135deg, #00f2fe 0%, #9d4edd 50%, #f43f5e 100%);
-    --grad-glow: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    --grad-text: linear-gradient(135deg, #ff3b30 0%, #ff5e62 50%, #ff9500 100%);
+    --grad-glow: radial-gradient(circle, rgba(255, 59, 48, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
 
     /* Typography */
     --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -31,7 +32,7 @@
     /* Transitions & Shadows */
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    --box-shadow-glow: 0 10px 40px -10px rgba(0, 242, 254, 0.3);
+    --box-shadow-glow: 0 10px 40px -10px rgba(255, 59, 48, 0.4);
     --glass-blur: blur(20px);
 }
 
